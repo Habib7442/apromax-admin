@@ -21,36 +21,36 @@ export function InvoicePreview({ invoice, className = '' }: InvoicePreviewProps)
           line-height: 1.4;
           color: #000;
           background: #fff;
-          padding: 20px;
-          min-height: 297mm;
+          padding: 15px;
+          font-size: 9px;
         }
-        
+
         .header {
           display: flex;
           align-items: center;
-          margin-bottom: 20px;
-          border-bottom: 2px solid #0066cc;
-          padding-bottom: 15px;
+          margin-bottom: 12px;
+          border-bottom: 2px solid #1e40af;
+          padding-bottom: 10px;
         }
-        
+
         .logo {
-          width: 150px;
-          height: 60px;
+          width: 120px;
+          height: 48px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-right: 20px;
+          margin-right: 15px;
         }
-        
+
         .company-title {
           flex: 1;
         }
         
         .company-title h1 {
-          font-size: 28px;
-          color: #0066cc;
+          font-size: 18px;
+          color: #1e40af;
           font-weight: bold;
-          margin-bottom: 5px;
+          margin-bottom: 3px;
         }
         
 
@@ -58,114 +58,121 @@ export function InvoicePreview({ invoice, className = '' }: InvoicePreviewProps)
         .company-info {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 30px;
-          margin-bottom: 20px;
-          font-size: 11px;
+          gap: 15px;
+          margin-bottom: 10px;
+          font-size: 8px;
+          line-height: 1.3;
         }
-        
+
         .office-title {
           font-weight: bold;
-          margin-bottom: 5px;
+          margin-bottom: 3px;
+          color: #1e40af;
+          font-size: 9px;
         }
         
         .invoice-header {
           display: grid;
           grid-template-columns: 2fr 1fr;
-          gap: 30px;
-          margin-bottom: 20px;
-        }
-        
-        .invoice-details {
-          background: #f8f9fa;
-          padding: 15px;
-          border-radius: 5px;
-        }
-        
-        .invoice-number {
-          font-size: 14px;
-          font-weight: bold;
+          gap: 15px;
           margin-bottom: 10px;
         }
-        
+
+        .invoice-details {
+          background: #f8f9fa;
+          padding: 8px;
+          border-radius: 3px;
+        }
+
+        .invoice-number {
+          font-size: 10px;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
         .balance-due {
           text-align: center;
-          background: #0066cc;
+          background: #1e40af;
           color: white;
-          padding: 15px;
-          border-radius: 5px;
-          margin-left: 20px;
+          padding: 8px;
+          border-radius: 3px;
+          margin-left: 10px;
         }
-        
+
         .balance-due h2 {
-          font-size: 12px;
-          margin-bottom: 5px;
+          font-size: 9px;
+          margin-bottom: 3px;
           font-weight: normal;
         }
-        
+
         .balance-due h1 {
-          font-size: 24px;
+          font-size: 16px;
           font-weight: bold;
         }
         
         .billing-section {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 30px;
-          margin-bottom: 20px;
+          gap: 15px;
+          margin-bottom: 10px;
         }
-        
+
         .bill-to {
           background: #f8f9fa;
-          padding: 15px;
-          border-radius: 5px;
+          padding: 8px;
+          border-radius: 3px;
         }
-        
+
         .bill-to h3 {
-          color: #0066cc;
-          font-size: 14px;
-          margin-bottom: 10px;
+          color: #1e40af;
+          font-size: 10px;
+          margin-bottom: 5px;
         }
-        
+
         .client-name {
-          font-size: 18px;
+          font-size: 12px;
           font-weight: bold;
-          margin-bottom: 10px;
+          margin-bottom: 5px;
         }
-        
+
         .invoice-meta {
-          font-size: 11px;
-          line-height: 1.6;
+          font-size: 8px;
+          line-height: 1.4;
         }
-        
+
         .subject-section {
-          margin-bottom: 20px;
-          padding: 10px;
+          margin-bottom: 8px;
+          padding: 6px;
           background: #f8f9fa;
-          border-radius: 5px;
+          border-radius: 3px;
+          font-size: 9px;
         }
-        
+
         .subject-section strong {
-          color: #0066cc;
+          color: #1e40af;
+          font-size: 9px;
         }
         
         .items-table {
           width: 100%;
           border-collapse: collapse;
-          margin-bottom: 20px;
-          font-size: 11px;
+          margin-bottom: 8px;
+          font-size: 8px;
         }
-        
+
         .items-table th {
-          background: #0066cc;
+          background: #1e40af;
           color: white;
-          padding: 12px 8px;
+          padding: 6px 4px;
           text-align: left;
           font-weight: bold;
+          font-size: 8px;
         }
-        
+
         .items-table td {
-          padding: 12px 8px;
+          padding: 5px 4px;
           border-bottom: 1px solid #ddd;
+          font-size: 8px;
         }
         
         .items-table tr:nth-child(even) {
@@ -182,50 +189,52 @@ export function InvoicePreview({ invoice, className = '' }: InvoicePreviewProps)
         
         .totals-section {
           float: right;
-          width: 300px;
-          margin-bottom: 20px;
+          width: 250px;
+          margin-bottom: 8px;
         }
-        
+
         .totals-table {
           width: 100%;
-          font-size: 12px;
+          font-size: 8px;
         }
-        
+
         .totals-table td {
-          padding: 5px 10px;
+          padding: 3px 6px;
           border-bottom: 1px solid #ddd;
+          font-size: 8px;
         }
-        
+
         .total-row {
-          background: #0066cc;
+          background: #1e40af;
           color: white;
           font-weight: bold;
         }
         
         .amount-words {
           clear: both;
-          margin-bottom: 20px;
+          margin-bottom: 8px;
           font-style: italic;
-          font-size: 11px;
+          font-size: 8px;
         }
-        
+
         .notes-section, .payment-section {
-          margin-bottom: 20px;
-          font-size: 11px;
-          line-height: 1.5;
+          margin-bottom: 8px;
+          font-size: 8px;
+          line-height: 1.3;
         }
-        
+
         .notes-section h4, .payment-section h4 {
-          color: #0066cc;
-          font-size: 12px;
-          margin-bottom: 10px;
+          color: #1e40af;
+          font-size: 9px;
+          margin-bottom: 5px;
         }
-        
+
         .bank-details {
           background: #f8f9fa;
-          padding: 15px;
-          border-radius: 5px;
-          margin-top: 10px;
+          padding: 8px;
+          border-radius: 3px;
+          margin-top: 5px;
+          font-size: 8px;
         }
       `}</style>
       
@@ -236,7 +245,7 @@ export function InvoicePreview({ invoice, className = '' }: InvoicePreviewProps)
             <img
               src="/logo.png"
               alt="AproMax Engineering LLP"
-              style={{ width: '150px', height: '60px', objectFit: 'contain' }}
+              style={{ width: '120px', height: '48px', objectFit: 'contain' }}
             />
           </div>
           <div className="company-title">

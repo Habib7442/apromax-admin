@@ -24,9 +24,10 @@ interface InvoiceFormProps {
   onSave: (invoice: InvoiceFormData) => void
   onCancel: () => void
   isLoading?: boolean
+  showButtons?: boolean
 }
 
-export function InvoiceForm({ invoice, onSave, onCancel, isLoading = false }: InvoiceFormProps) {
+export function InvoiceForm({ invoice, onSave, onCancel, isLoading = false, showButtons = true }: InvoiceFormProps) {
   const [formData, setFormData] = useState<InvoiceFormData>({
     invoiceNumber: invoice?.invoiceNumber || generateInvoiceNumber(),
     invoiceDate: invoice?.invoiceDate || new Date().toISOString().split('T')[0],
@@ -68,12 +69,14 @@ export function InvoiceForm({ invoice, onSave, onCancel, isLoading = false }: In
   useEffect(() => {
     const totals = calculateInvoiceTotals(formData.items)
     const totalInWords = numberToWords(totals.total, formData.currency)
-    
+
     setCalculatedTotals({
       ...totals,
       totalInWords
     })
   }, [formData.items, formData.currency])
+
+
 
   const updateItem = (index: number, field: keyof InvoiceItem, value: any) => {
     const newItems = [...formData.items]
@@ -448,14 +451,16 @@ export function InvoiceForm({ invoice, onSave, onCancel, isLoading = false }: In
       </Card>
 
       {/* Form Actions */}
-      <div className="flex justify-end gap-4">
-        <Button type="button" variant="outline" onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? 'Saving...' : 'Save Invoice'}
-        </Button>
-      </div>
+      {showButtons && (
+        <div className="flex justify-end gap-4">
+          <Button type="button" variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? 'Saving...' : 'Save Invoice'}
+          </Button>
+        </div>
+      )}
     </form>
   )
 }

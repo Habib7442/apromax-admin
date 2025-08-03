@@ -96,10 +96,6 @@ export function DataTable({
                 <Filter className="w-4 h-4" />
                 Filter
               </Button>
-              <Button variant="outline" size="sm" className="gap-2">
-                <Download className="w-4 h-4" />
-                Export
-              </Button>
             </div>
           </div>
         )}
@@ -128,7 +124,7 @@ export function DataTable({
                   </TableHead>
                 ))}
                 {actions && (
-                  <TableHead className="text-right font-semibold text-slate-700 dark:text-slate-300">
+                  <TableHead className="text-center font-semibold text-slate-700 dark:text-slate-300">
                     Actions
                   </TableHead>
                 )}
@@ -153,8 +149,8 @@ export function DataTable({
                     </TableCell>
                   ))}
                   {actions && (
-                    <TableCell className="text-right">
-                      <div onClick={(e) => e.stopPropagation()}>
+                    <TableCell className="text-center">
+                      <div onClick={(e) => e.stopPropagation()} className="flex items-center justify-center">
                         {actions(row)}
                       </div>
                     </TableCell>

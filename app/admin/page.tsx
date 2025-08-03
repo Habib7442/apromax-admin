@@ -283,9 +283,7 @@ export default function AdminPanel() {
     }
   }
 
-  const handleExportInvoice = (invoice: InvoiceUI) => {
-    exportInvoiceToPDF(invoice)
-  }
+
 
   const generateSlug = (title: string) => {
     return title
@@ -1124,7 +1122,6 @@ export default function AdminPanel() {
                   onCreateInvoice={handleCreateInvoice}
                   onUpdateInvoice={handleUpdateInvoice}
                   onDeleteInvoice={handleDeleteInvoice}
-                  onExportInvoice={handleExportInvoice}
                   isLoading={isLoading}
                 />
               </motion.div>

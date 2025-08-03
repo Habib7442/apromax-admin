@@ -34,6 +34,7 @@ import {
 import { InvoiceUI, InvoiceFormData } from '@/types/invoice'
 import { InvoiceForm } from './invoice-form'
 import { InvoicePreview } from './invoice-preview'
+import { SignatureUpload } from './signature-upload'
 import { DataTable } from '@/components/admin/data-table'
 import { formatCurrency, formatDate } from '@/lib/invoice-utils'
 import { toast } from 'sonner'
@@ -43,7 +44,7 @@ interface InvoiceManagerProps {
   onCreateInvoice: (invoice: InvoiceFormData) => Promise<void>
   onUpdateInvoice: (id: string, invoice: InvoiceFormData) => Promise<void>
   onDeleteInvoice: (id: string) => Promise<void>
-  onExportInvoice: (invoice: InvoiceUI) => void
+  onExportInvoice?: (invoice: InvoiceUI) => void
   isLoading?: boolean
 }
 
@@ -59,6 +60,8 @@ export function InvoiceManager({
   const [selectedInvoice, setSelectedInvoice] = useState<InvoiceUI | null>(null)
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [invoiceToDelete, setInvoiceToDelete] = useState<InvoiceUI | null>(null)
+  const [signatureDialogOpen, setSignatureDialogOpen] = useState(false)
+  const [invoiceToExport, setInvoiceToExport] = useState<InvoiceUI | null>(null)
 
   const handleCreateInvoice = async (invoiceData: InvoiceFormData) => {
     try {
@@ -85,7 +88,7 @@ export function InvoiceManager({
 
   const handleDeleteInvoice = async () => {
     if (!invoiceToDelete?.$id) return
-    
+
     try {
       await onDeleteInvoice(invoiceToDelete.$id)
       setDeleteDialogOpen(false)
@@ -93,6 +96,15 @@ export function InvoiceManager({
       toast.success('Invoice deleted successfully')
     } catch (error) {
       toast.error('Failed to delete invoice')
+    }
+  }
+
+  const handleExportInvoice = (invoice: InvoiceUI) => {
+    if (onExportInvoice) {
+      onExportInvoice(invoice)
+    } else {
+      setInvoiceToExport(invoice)
+      setSignatureDialogOpen(true)
     }
   }
 
@@ -200,11 +212,19 @@ export function InvoiceManager({
             Back to List
           </Button>
         </div>
-        <InvoiceForm
-          onSave={handleCreateInvoice}
-          onCancel={() => setView('list')}
-          isLoading={isLoading}
-        />
+        <Card>
+          <CardHeader>
+            <CardTitle>Invoice Details</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <InvoiceForm
+              onSave={handleCreateInvoice}
+              onCancel={() => setView('list')}
+              isLoading={isLoading}
+              showButtons={true}
+            />
+          </CardContent>
+        </Card>
       </div>
     )
   }
@@ -218,12 +238,20 @@ export function InvoiceManager({
             Back to List
           </Button>
         </div>
-        <InvoiceForm
-          invoice={selectedInvoice}
-          onSave={handleUpdateInvoice}
-          onCancel={() => setView('list')}
-          isLoading={isLoading}
-        />
+        <Card>
+          <CardHeader>
+            <CardTitle>Edit Invoice Details</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <InvoiceForm
+              invoice={selectedInvoice}
+              onSave={handleUpdateInvoice}
+              onCancel={() => setView('list')}
+              isLoading={isLoading}
+              showButtons={true}
+            />
+          </CardContent>
+        </Card>
       </div>
     )
   }
@@ -236,7 +264,7 @@ export function InvoiceManager({
           <div className="flex gap-2">
             <Button
               variant="outline"
-              onClick={() => onExportInvoice(selectedInvoice)}
+              onClick={() => handleExportInvoice(selectedInvoice)}
               className="gap-2"
             >
               <Download className="w-4 h-4" />
@@ -331,7 +359,7 @@ export function InvoiceManager({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onExportInvoice(invoice)}
+                  onClick={() => handleExportInvoice(invoice)}
                   className="h-8 w-8 p-0"
                 >
                   <Download className="w-4 h-4" />
@@ -375,6 +403,24 @@ export function InvoiceManager({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Signature Upload Dialog */}
+      <Dialog open={signatureDialogOpen} onOpenChange={setSignatureDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Export Invoice</DialogTitle>
+          </DialogHeader>
+          {invoiceToExport && (
+            <SignatureUpload
+              invoice={invoiceToExport}
+              onClose={() => {
+                setSignatureDialogOpen(false)
+                setInvoiceToExport(null)
+              }}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
